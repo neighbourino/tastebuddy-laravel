@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::prefix('v1')->middleware('setlocale')->group(function () {
+
+    Route::apiResource('flavours', \App\Http\Controllers\API\FlavourController::class);
+    Route::apiResource('flavours.pairings', \App\Http\Controllers\API\FlavourPairingController::class);
+
+});
