@@ -12,7 +12,7 @@ class Pairing extends Model
 
     protected $guarded = [];
 
-    public $translatable = ['description'];
+    public $translatable = ['name', 'description'];
 
     public function primary_flavour() {
         return $this->belongsTo(Flavour::class,'primary_flavour_id');
@@ -20,5 +20,16 @@ class Pairing extends Model
 
     public function secondary_flavour() {
         return $this->belongsTo(Flavour::class, 'secondary_flavour_id');
+    }
+
+    public function getNameAttribute($value)
+    {
+
+        $locale = (app()->getLocale()) ? app()->getLocale() : 'en';
+
+        return
+            (Flavour::find($this->primary_flavour_id)->getTranslation('name', $locale))
+            . ' + ' .
+            (Flavour::find($this->secondary_flavour_id)->getTranslation('name', $locale));
     }
 }

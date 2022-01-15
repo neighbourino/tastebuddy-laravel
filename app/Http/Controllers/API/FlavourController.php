@@ -59,7 +59,15 @@ class FlavourController extends Controller {
     public function show($id) {
         $flavour = Flavour::findOrFail($id);
 
+
         $flavour->pairings = $flavour->pairings();
+
+        $locale = (app()->getLocale()) ? app()->getLocale() : 'en';
+
+        /*$flavour->name =
+            (Flavour::find($flavour->primary_flavour_id)->getTranslation('name', $locale))
+            . ' + ' .
+            (Flavour::find($flavour->secondary_flavour_id)->getTranslation('name', $locale));*/
 
         return response()->json(
             $flavour
