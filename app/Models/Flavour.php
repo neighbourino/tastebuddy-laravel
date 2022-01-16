@@ -66,6 +66,11 @@ class Flavour extends Model
                 . ' + ' .
                 (Flavour::find($item->secondary_flavour_id)->getTranslation('name', $locale));
 
+            $item->name_translated =
+                (Flavour::find($item->primary_flavour_id)->getTranslation('name', $locale))
+                . ' + ' .
+                (Flavour::find($item->secondary_flavour_id)->getTranslation('name', $locale));
+
             $item->description_translated = (Pairing::find($item->id)->getTranslation('description', $locale));
 
 
