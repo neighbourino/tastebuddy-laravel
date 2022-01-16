@@ -35,6 +35,9 @@ class IndexFlavoursController extends Controller
 
             $item->description_translated = $item->getTranslation('description', $locale);
 
+            $item->pairings = $item->pairings();
+
+
 
             return $item;
         });

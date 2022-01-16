@@ -24,6 +24,8 @@ class ShowFlavourController extends Controller
 
         $flavour->description_translated = $flavour->getTranslation('description', $locale);
 
+        $flavour->pairings = $flavour->pairings();
+
         return $flavour;
     }
 }

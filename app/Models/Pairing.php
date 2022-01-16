@@ -33,5 +33,8 @@ class Pairing extends Model
             (Flavour::find($this->secondary_flavour_id)->getTranslation('name', $locale));
     }
 
+    public function flavours() {
 
+        return $this->belongsToMany(Flavour::class);
+    }
 }
