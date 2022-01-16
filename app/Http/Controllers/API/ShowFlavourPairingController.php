@@ -19,17 +19,15 @@ class ShowFlavourPairingController extends Controller
     {
        $flavourPairing = Pairing::findOrFail($id);
 
-
-
         $locale = (app()->getLocale()) ? app()->getLocale() : 'en';
 
-        $flavourPairing->name =
+        $flavourPairing->name_translated =
             (Flavour::find($flavourPairing->primary_flavour_id)->getTranslation('name', $locale))
             . ' + ' .
             (Flavour::find($flavourPairing->secondary_flavour_id)->getTranslation('name', $locale));
 
-        return response()->json(
-            $flavourPairing
-        );
+        $flavourPairing->description_translated = $flavourPairing->getTranslation('description', $locale);
+
+        return $flavourPairing;
     }
 }

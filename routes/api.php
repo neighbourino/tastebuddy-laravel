@@ -21,9 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->middleware('setlocale')->group(function () {
 
-    Route::get('flavours', [\App\Http\Controllers\API\FlavourController::class, 'index']);
-   # Route::apiResource('flavours.pairings', \App\Http\Controllers\API\FlavourPairingController::class);
 
+    Route::get('flavours/{id}', \App\Http\Controllers\API\ShowFlavourController::class);
+    Route::get('flavours', \App\Http\Controllers\API\IndexFlavoursController::class);
     Route::get('flavourPairing/{id}', \App\Http\Controllers\API\ShowFlavourPairingController::class);
 
 });
