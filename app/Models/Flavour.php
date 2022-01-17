@@ -74,15 +74,19 @@ class Flavour extends Model implements HasMedia
 
             $item->description_translated = (Pairing::find($item->id)->getTranslation('description', $locale));
 
-            $primaryFlavourImage = $primaryFlavour->getMedia('featured_images')->first();
+            $item->primary_featured_image = '';
+            $item->primary_thumbnail = '';
 
+            $primaryFlavourImage = $primaryFlavour->getMedia('featured_images')->first();
             if ($primaryFlavourImage){
                 $item->primary_featured_image = $primaryFlavourImage->getFullUrl();
                 $item->primary_thumbnail = $primaryFlavourImage->getUrl('thumbnail');
             }
 
-            $secondaryFlavourImage = $secondaryFlavour->getMedia('featured_images')->first();
+            $item->secondary_featured_image = '';
+            $item->secondary_thumbnail = '';
 
+            $secondaryFlavourImage = $secondaryFlavour->getMedia('featured_images')->first();
             if ($secondaryFlavourImage){
                 $item->secondary_featured_image = $secondaryFlavourImage->getFullUrl();
                 $item->secondary_thumbnail = $secondaryFlavourImage->getUrl('thumbnail');

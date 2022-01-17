@@ -24,6 +24,15 @@ class ShowFlavourController extends Controller
 
         $flavour->description_translated = $flavour->getTranslation('description', $locale);
 
+        $flavour->featured_image = '';
+        $flavour->thumbnail = '';
+        $image = $flavour->getMedia('flavours')->first();
+
+        if ($image){
+            $flavour->featured_image = $image->getFullUrl();
+            $flavour->thumbnail = $image->getUrl('thumbnail');
+        }
+
         $flavour->pairings = $flavour->pairings();
 
         return $flavour;
