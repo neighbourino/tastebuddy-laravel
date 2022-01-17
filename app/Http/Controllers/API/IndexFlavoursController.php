@@ -37,6 +37,13 @@ class IndexFlavoursController extends Controller
 
             $item->pairings = $item->pairings();
 
+            $image = $item->getMedia('flavours')->first();
+
+            if ($image){
+
+                $item->featured_image = $image->getFullUrl();
+                $item->thumbnail = $image->getUrl('thumbnail');
+            }
 
 
             return $item;

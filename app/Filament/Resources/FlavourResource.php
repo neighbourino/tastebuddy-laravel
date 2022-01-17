@@ -14,6 +14,8 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class FlavourResource extends Resource
 {
@@ -35,6 +37,7 @@ class FlavourResource extends Resource
                             ->rows(10)
                             ->cols(20),
                         // Forms\Components\BelongsToManyMultiSelect::make('pairings')->relationship('pairings', 'name'),
+                        SpatieMediaLibraryFileUpload::make('featured_image')->collection('featured_images'),
                     ])
                     ->columns(1)
 
@@ -46,6 +49,7 @@ class FlavourResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->sortable(),
+                SpatieMediaLibraryImageColumn::make('featured_image')->collection('featured_images')->conversion('thumbnail'),
                 TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
