@@ -40,6 +40,12 @@ class IndexFlavoursController extends Controller
             $item->featured_image = '';
             $item->thumbnail = '';
 
+            $item->primary_featured_image = '';
+            $item->primary_thumbnail = '';
+
+            $item->secondary_featured_image = '';
+            $item->secondary_thumbnail = '';
+
             $image = $item->getMedia('featured_images')->first();
 
             if ($image){
