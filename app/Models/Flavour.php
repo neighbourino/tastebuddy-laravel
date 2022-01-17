@@ -64,6 +64,8 @@ class Flavour extends Model implements HasMedia
 
             $locale = (app()->getLocale()) ? app()->getLocale() : 'en';
 
+            $flavour = Flavour::find($flavourId);
+
             $primaryFlavour = Flavour::find($item->primary_flavour_id);
             $secondaryFlavour = Flavour::find($item->secondary_flavour_id);
 
@@ -73,6 +75,17 @@ class Flavour extends Model implements HasMedia
 
 
             $item->description_translated = (Pairing::find($item->id)->getTranslation('description', $locale));
+
+
+            $item->featured_image = '';
+            $item->thumbnail = '';
+            $image = $flavour->getMedia('flavours')->first();
+
+            if ($image){
+                $item->featured_image = $image->getFullUrl();
+                $item->thumbnail = $image->getUrl('thumbnail');
+            }
+
 
             $item->primary_featured_image = '';
             $item->primary_thumbnail = '';

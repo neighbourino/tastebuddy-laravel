@@ -33,6 +33,12 @@ class ShowFlavourController extends Controller
             $flavour->thumbnail = $image->getUrl('thumbnail');
         }
 
+        $flavour->primary_featured_image = '';
+        $flavour->primary_thumbnail = '';
+
+        $flavour->secondary_featured_image = '';
+        $flavour->secondary_thumbnail = '';
+
         $flavour->pairings = $flavour->pairings();
 
         return $flavour;
