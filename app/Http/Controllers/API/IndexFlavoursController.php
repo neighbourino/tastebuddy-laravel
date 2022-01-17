@@ -40,7 +40,7 @@ class IndexFlavoursController extends Controller
             $item->featured_image = '';
             $item->thumbnail = '';
 
-            $image = $item->getMedia('flavours')->first();
+            $image = $item->getMedia('featured_images')->first();
 
             if ($image){
 
