@@ -58,6 +58,8 @@ class IndexFlavoursController extends Controller
             return $item;
         });
 
-        return $data->sortBy('name');
+        $sorted = $data->sortBy('name');
+
+        return $sorted->values();
     }
 }
