@@ -18,42 +18,6 @@ class Flavour extends Model implements HasMedia
 
     public $translatable = ['name', 'description'];
 
-    /*public function pairings() {
-
-        $flavourId = $this->id;
-        $data = Pairing::where('primary_flavour_id', $this->id)->orWhere('secondary_flavour_id', $this->id)->get();
-
-        $data = $data->map(function($item) use ($flavourId){
-
-
-            $locale = (app()->getLocale()) ? app()->getLocale() : 'en';
-
-            $item->name =
-                (Flavour::find($item->primary_flavour_id)->getTranslation('name', $locale))
-                . ' + ' .
-                (Flavour::find($item->secondary_flavour_id)->getTranslation('name', $locale));
-
-            #$item->description_translated = (Pairing::find($flavourId)->getTranslation('description', $locale));
-
-
-            return $item;
-        });
-
-
-
-        return $data;
-    }*/
-
-    /*public function pairings()
-    {
-        return $this->belongsToMany(Pairing::class);
-    }*/
-
-    /*public function pairings()
-    {
-        return $this->belongsToMany(Flavour::class, 'pairings', 'primary_flavour_id', 'secondary_flavour_id');
-    }*/
-
     public function pairings() {
 
         $flavourId = $this->id;
@@ -66,16 +30,23 @@ class Flavour extends Model implements HasMedia
 
             $flavour = Flavour::find($flavourId);
 
-            $primaryFlavour = Flavour::find($item->primary_flavour_id);
-            $secondaryFlavour = Flavour::find($item->secondary_flavour_id);
+            $primaryFlavour = null;
+
+            if ($flavourId == $item->primary_flavour_id){
+
+                $primaryFlavour = Flavour::find($item->primary_flavour_id);
+                $secondaryFlavour = Flavour::find($item->secondary_flavour_id);
+            }else{
+
+                $primaryFlavour = Flavour::find($item->secondary_flavour_id);
+                $secondaryFlavour = Flavour::find($item->primary_flavour_id);
+            }
+
 
             $item->name = $primaryFlavour->getTranslation('name', $locale) . ' + ' . $secondaryFlavour->getTranslation('name', $locale);
-
             $item->name_translated = $primaryFlavour->getTranslation('name', $locale) . ' + ' . $secondaryFlavour->getTranslation('name', $locale);
 
-
             $item->description_translated = (Pairing::find($item->id)->getTranslation('description', $locale));
-
 
             $item->featured_image = '';
             $item->thumbnail = '';
