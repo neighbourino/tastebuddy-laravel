@@ -18,7 +18,7 @@ class IndexFlavoursController extends Controller
     {
         $flavours = Flavour::query();
 
-        if($request->has('query')) {
+        if($request->has('query') && trim($request->get('query')) != '') {
             $flavours->where('name', 'LIKE', '%'.$request->get('query').'%');
         }
 
