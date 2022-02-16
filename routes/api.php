@@ -27,3 +27,6 @@ Route::prefix('v1')->middleware('setlocale')->group(function () {
     Route::get('flavourPairing/{id}', \App\Http\Controllers\API\ShowFlavourPairingController::class);
 
 });
+
+
+Route::post('auth/token', \App\Http\Controllers\API\GenerateTokenRequestController::class);
